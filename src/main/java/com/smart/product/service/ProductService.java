@@ -1,7 +1,6 @@
 package com.smart.product.service;
 
 import com.smart.product.entity.Product;
-import lombok.Lombok;
 
 import java.util.List;
 
@@ -13,7 +12,7 @@ public interface ProductService {
      List<Product> getAllProduct();
      Boolean saveProduct(Product product);
      Product getProductById(Long pId);
-     Product grtProductByName(String pName);
+     Product getProductByName(String pName);
      Boolean deleteProductById(Long pId);
 
 }
