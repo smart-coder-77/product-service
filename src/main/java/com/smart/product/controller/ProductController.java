@@ -22,14 +22,14 @@ public class ProductController {
     public String saveProduct(@RequestBody Product product){
         return productService.saveProduct(product)?"Product saved successfully":"Product not saved";
     }
-    
-    @GetMapping("/all")
+
+    @GetMapping(value = "/all")
     public List<Product> getListOfProducts(){
         return productService.getAllProduct();
     }
 
     @GetMapping("/")
-    public Product getProductByID(@RequestParam Long id){
+    public Product getProductsByID(@RequestParam Long id){
         return productService.getProductById(id);
     }
 

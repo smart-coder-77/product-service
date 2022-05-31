@@ -32,14 +32,11 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Boolean saveProduct(Product product) {
-        if (product.getPid()!=null){
+       if (product.getPName()!=null){
             productRepository.save(product);
             return true;
-        }else if(product.getPid()==null){
-            throw new ProductNotSavedException("Product"+ product.getPid()+"Cannot save Null");
-        }
-        else {
-            throw new ProductNotSavedException("Product"+ product.getPid()+"Not Saved");
+        }else {
+            throw new ProductNotSavedException("Product Not Saved");
         }
     }
 
@@ -50,7 +47,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Product getProductByName(String pName) {
-        Product product= productRepository.findByProductName(pName);
+        Product product= productRepository.findBypName(pName);
         if (product.getPid()!=null){
             return product;
         }else {

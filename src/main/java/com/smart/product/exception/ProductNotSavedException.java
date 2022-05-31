@@ -6,6 +6,7 @@ package com.smart.product.exception;
 
 
 public class ProductNotSavedException extends RuntimeException {
-    public ProductNotSavedException(String s) {
+    public ProductNotSavedException(String msg) {
+        super(msg);
     }
 }

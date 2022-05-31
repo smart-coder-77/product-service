@@ -1,10 +1,9 @@
 package com.smart.product.entity;
 
-import jdk.internal.net.http.common.Log;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import javax.persistence.*;
 import java.util.Date;
 
@@ -15,15 +14,19 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "PRODUCT")
+@Table(name ="PRODUCT")
 public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long pid;
     private String pName;
-    private Date pMfgDate;
-    private Date pExpireDate;
+    private String pDescription;
     private Long pStock;
     private Double pPrice;
+    @JsonFormat(pattern = "yyyy/MM/dd")
+    private Date pMfgDate;
+    @JsonFormat(pattern = "yyyy/MM/dd")
+    private Date pExpireDate;
+
 }
