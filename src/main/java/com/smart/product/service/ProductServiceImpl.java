@@ -2,6 +2,7 @@ package com.smart.product.service;
 
 import com.smart.product.entity.Product;
 import com.smart.product.exception.ProductIdNotFoundException;
+import com.smart.product.exception.ProductNotFoundException;
 import com.smart.product.exception.ProductNotSavedException;
 import com.smart.product.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,12 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<Product> getAllProduct() {
-        return productRepository.findAll();
+        List<Product> products = productRepository.findAll();
+        if (products.size()>0){
+            return products;
+        }else {
+            throw new ProductNotFoundException("Product Not Found");
+        }
     }
 
     @Override
