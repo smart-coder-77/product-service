@@ -1,25 +1,17 @@
-package com.smart.product.entity;
+package com.smart.product.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-import javax.persistence.*;
+
+import javax.persistence.Id;
 import java.util.Date;
 
 /**
- * @author Choudhury Subham on 31-05-2022
+ * @author Choudhury Subham on 01-06-2022
  */
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
-@Entity
-@Table(name ="PRODUCT")
-public class Product {
+public class ProductDto {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Long pid;
     private String pName;
     private String pDescription;
     private Long pStock;
@@ -28,6 +20,5 @@ public class Product {
     private Date pMfgDate;
     @JsonFormat(pattern = "yyyy/MM/dd")
     private Date pExpireDate;
-
 
 }

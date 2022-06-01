@@ -1,9 +1,11 @@
 package com.smart.product.service;
 
+import com.smart.product.dto.ProductDto;
 import com.smart.product.entity.Product;
 import com.smart.product.exception.ProductIdNotFoundException;
 import com.smart.product.exception.ProductNotFoundException;
 import com.smart.product.exception.ProductNotSavedException;
+import com.smart.product.mapper.ProductMapper;
 import com.smart.product.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,6 +22,9 @@ public class ProductServiceImpl implements ProductService {
     @Autowired
     private ProductRepository productRepository;
 
+    @Autowired
+    private ProductMapper productMapper;
+
     @Override
     public List<Product> getAllProduct() {
         List<Product> products = productRepository.findAll();
@@ -31,9 +36,9 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Boolean saveProduct(Product product) {
-       if (product.getPName()!=null){
-            productRepository.save(product);
+    public Boolean saveProduct(ProductDto productDto) {
+       if (productDto.getPName()!=null){
+            productRepository.save(productMapper.dtoToEntity(productDto));
             return true;
         }else {
             throw new ProductNotSavedException("Product Not Saved");
@@ -41,15 +46,15 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Product getProductById(Long pId) {
-        return productRepository.findById(pId).orElseThrow(()->new ProductIdNotFoundException("Product"+pId+"NotFound Exception"));
+    public ProductDto getProductById(Long pId) {
+        return productMapper.entityToDto(productRepository.findById(pId).orElseThrow(()->new ProductIdNotFoundException("Product"+pId+"NotFound Exception")));
     }
 
     @Override
-    public Product getProductByName(String pName) {
-        Product product= productRepository.findBypName(pName);
-        if (product.getPid()!=null){
-            return product;
+    public ProductDto getProductByName(String pName) {
+        ProductDto productDto= productMapper.entityToDto(productRepository.findBypName(pName));
+        if (productDto.getPName()!=null){
+            return productDto;
         }else {
             throw new ProductIdNotFoundException("Product"+pName+"Not Found Exception");
         }
@@ -57,8 +62,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Boolean deleteProductById(Long pId) {
-        Product product = getProductById(pId);
-        productRepository.delete(product);
+        productRepository.deleteById(pId);
         return true;
     }
 }

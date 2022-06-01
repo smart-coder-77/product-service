@@ -1,5 +1,6 @@
 package com.smart.product.service;
 
+import com.smart.product.dto.ProductDto;
 import com.smart.product.entity.Product;
 
 import java.util.List;
@@ -10,9 +11,9 @@ import java.util.List;
 public interface ProductService {
 
      List<Product> getAllProduct();
-     Boolean saveProduct(Product product);
-     Product getProductById(Long pId);
-     Product getProductByName(String pName);
+     Boolean saveProduct(ProductDto productDto);
+     ProductDto getProductById(Long pId);
+     ProductDto getProductByName(String pName);
      Boolean deleteProductById(Long pId);
 
 }

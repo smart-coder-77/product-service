@@ -20,13 +20,13 @@ public class RestExceptionHandler {
     @ExceptionHandler(value = ProductNotFoundException.class)
     public ResponseEntity<ErrorDetails> handleProductNotFoundException(){
         ErrorDetails errorDetails= new ErrorDetails(404,"No product available in DB",new Date());
-        return new ResponseEntity<ErrorDetails>(errorDetails, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<ErrorDetails>(errorDetails, HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(value = ProductIdNotFoundException.class)
     public ResponseEntity<ErrorDetails> handleProductIdNotFoundException(){
         ErrorDetails errorDetails= new ErrorDetails(404,"No product available",new Date());
-        return new ResponseEntity<ErrorDetails>(errorDetails, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<ErrorDetails>(errorDetails, HttpStatus.NOT_FOUND);
     }
     @ExceptionHandler(value = ProductNotSavedException.class)
     public ResponseEntity<ErrorDetails> handleProductNotSavedException(){
